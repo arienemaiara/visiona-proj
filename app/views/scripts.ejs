@@ -1,0 +1,163 @@
+<script>
+    window.lazySizesConfig = window.lazySizesConfig || {};
+    window.lazySizesConfig.expand = 500;
+    window.lazySizesConfig.loadMode = 2;
+</script>
+
+<!-- script principal -->
+<script src="js/main/main-app.js"></script>
+
+<!--=============================== event control ============================== -->
+<script>
+     $(document).ready(function () {
+        var img_selected_info = [];
+        $('#rangeDate').flatpickr({
+            mode: 'range',
+            dateFormat: 'Y-m-d',
+            maxDate: 'today',
+            defaultDate: ['2019-04-01', '2019-04-30'],
+            onChange: [function (selectedDates) {
+                const dateArr = selectedDates.map(date => this.formatDate(date, "Y-m-d"));
+                startDate = dateArr[0];
+                endDate = dateArr[1];
+            }]
+        });
+    })
+
+    $('.nav-item').mouseover(function () {
+        this.style.backgroundColor = "#696969"
+    })
+    $('.nav-item').mouseout(function () {
+        this.style.backgroundColor = "#000000"
+    })
+    init_steps = () => {
+        $('.sidebar-menu-1').addClass('show-sidebar');
+        $('.step-2').css('display', 'none');
+    }
+    init_steps()
+    toggle_info = (scene_id) => {
+        if ($('.filter').hasClass("show-filter")) {
+            $('.filter').removeClass('show-filter')
+            $('.filter').css('left', '-300px')
+        }
+
+        if ($('.sidebar-info').hasClass('show-sidebar-info')) {
+            if (last_id == scene_id) {
+                $('.sidebar-info').removeClass('show-sidebar-info');
+            } else {
+                $('.sidebar-info').addClass('show-sidebar-info');
+                img_info(scene_id);
+            }
+            last_id = scene_id
+
+        } else {
+            $('.sidebar-info').addClass('show-sidebar-info');
+            img_info(scene_id);
+            last_id = scene_id
+        }
+    }
+    removeNavActive = (n) => {
+        switch (n) {
+            case 1:
+                if (!$('.nav-item-step-1').hasClass('nav-item-active')) $('.nav-item-step-1').addClass(
+                    'nav-item-active')
+                $('.nav-item-step-2').removeClass('nav-item-active')
+                break
+
+            case 2:
+                if (!$('.nav-item-step-2').hasClass('nav-item-active')) {
+                    $('.nav-item-step-2').addClass('nav-item-active')
+                }
+                $('.nav-item-step-1').removeClass('nav-item-active')
+                break
+        }
+    }
+    show_catalog = () => {
+        $('.sidebar-info').css('left', '70px')
+        $('.filter').css('left', '70px')
+        $('.sidebar-menu-2').addClass('show-sidebar')
+        removeNavActive(2)
+    }
+    close_sidebar_info = () => {
+        $('.sidebar-info').removeClass('show-sidebar-info')
+    }
+    close_sidebar = () => {
+        $('.sidebar-info').removeClass('show-sidebar-info')
+        $('.sidebar-info').css('left', '-300px')
+        $('.filter').removeClass('show-filter')
+        $('.filter').css('left', '-300px')
+        $('.sidebar').removeClass('show-sidebar')
+    }
+    close_filter = () => {
+        $('.filter').removeClass('show-filter')
+    }
+    toggle_filter = () => {
+        if ($('.sidebar-info').hasClass('show-sidebar-info')) {
+            $('.sidebar-info').removeClass('show-sidebar-info')
+            $('.sidebar_info').css('left', '-300px')
+        }
+        if ($('.filter').hasClass('show-filter')) $('.filter').removeClass('show-filter')
+        else $('.filter').addClass('show-filter')
+    }
+    handle_show = (n) => {
+        $('.sidebar-info').css('left', '-300px')
+        $('.filter').css('left', '-300px')
+        switch (n) {
+            case 1:
+                if ($('.sidebar-menu-1').hasClass('show-sidebar')) {
+                    $('.sidebar-menu-1').removeClass('show-sidebar')
+                    $('.sidebar-info').removeClass('show-sidebar-info')
+                    $('.filter').removeClass('show-filter')
+                    removeNavActive(n)
+                    $('.nav-item-step-1').removeClass('nav-item-active')
+
+
+                } else {
+
+                    $('.sidebar').removeClass('show-sidebar')
+                    $('.sidebar-info').removeClass('show-sidebar-info')
+                    $('.filter').removeClass('show-filter')
+                    $('.sidebar-menu-1').addClass('show-sidebar')
+                    removeNavActive(n)
+                }
+                break
+            case 2:
+                if ($('.sidebar-menu-2').hasClass('show-sidebar')) {
+                    $('.sidebar-menu-2').removeClass('show-sidebar')
+                    $('.sidebar-info').removeClass('show-sidebar-info')
+                    $('.filter').removeClass('show-filter')
+                    removeNavActive(n)
+                    $('.nav-item-step-2').removeClass('nav-item-active')
+
+                } else {
+                    $('.sidebar').removeClass('show-sidebar')
+                    $('.sidebar-info').css('left', '70px')
+                    $('.filter').css('left', '70px')
+                    $('.sidebar-menu-2').addClass('show-sidebar')
+                    removeNavActive(n)
+                }
+                break
+        }
+    }
+    handle_steps = (s) => {
+        $('.sidebar-info').css('left', '-300px')
+        $('.filter').css('left', '-300px')
+        $('.sidebar').removeClass('show-sidebar')
+        switch (s) {
+            case 1:
+                removeNavActive(s)
+                $('.sidebar-info').removeClass('show-sidebar-info')
+                $('.filter').removeClass('show-filter')
+                $('.sidebar-menu-1').addClass('show-sidebar')
+                break
+            case 2:
+                removeNavActive(s)
+                $('.sidebar-info').removeClass('show-sidebar-info')
+                $('.filter').css('left', '70px')
+                $('.sidebar-menu-2').addClass('show-sidebar')
+
+                break
+        }
+    }
+</script>
+<!-- =========================================================================== -->

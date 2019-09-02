@@ -1,0 +1,33 @@
+
+.leaflet-control-coordinates {
+    background-color: rgba(0, 0, 0, .5);
+    font-family: 'Roboto Mono', 'Roboto', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    color: #FFF;
+    display: inherit;
+    font-weight: inherit;
+    padding: 2px 6px;
+    width: 300px;
+    margin-right: 160px !important;
+    margin-bottom: 3px !important;
+    border-radius: 4px;
+}
+
+.leaflet-control-coordinates,.leaflet-control-coordinates .uiElement input {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px
+}
+
+.leaflet-control-coordinates .uiElement {
+    margin: 4px
+}
+
+.leaflet-control-coordinates .uiElement .labelFirst {
+    margin-right: 4px
+}
+
+.leaflet-control-coordinates .uiHidden {
+    display: none
+}

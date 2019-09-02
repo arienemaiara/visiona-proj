@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset=utf-8 />
+	<title>Visiona Tecnologia Espacial</title>
+	<% include ./head %>
+</head>
+<body class='no-touch'>
+	<!-- ========================= SIDE NAVBAR ========================= -->
+	<nav class="navbar navbar-expand navbar-dark bg-dark fixed-left sidebar-fixed-color sidebar-hover">
+		<a class="navbar-brand" href="http://www.visionaespacial.com.br" target="_blank">
+			<img src="/img/Logo_Visiona_branco_teste.png" width="30px">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<button hidden id="button-start-search"></button>
+
+		<!-- ICONS MENU -->
+		<div class="collapse navbar-collapse menu-icons " id="navbarsExampleDefault">
+			<ul class="navbar-nav mt-5">
+				<!-- ========================= ICON MENU Passo 1 Selecione AOI =========================  -->
+				<li class="nav-item">
+					<a class="nav-link step-1 nav-item-step-1" onclick="handle_show(1)">
+						<img src="/img/search.png" style="width: 25px; filter: invert(100%); margin: 10px 0px">
+					</a>
+				</li>
+				<!-- =================================================================================== -->
+
+				<!-- ========================= ICON MENU Passo 2 Selecionar imagem ========================= -->
+				<li class="nav-item">
+					<a class="nav-link step-2 nav-item-step-2" onclick="handle_show(2)">
+						<img src="/img/selecticon.png" style="width: 25px; filter: invert(100%); margin: 10px 0px">
+					</a>
+				</li>
+				<!-- =================================================================================== -->
+			</ul>
+		</div>
+	</nav>
+	<!-- =================================================================================== -->
+
+
+	<!-- ========================= SIDEBAR Passo 1 Selecione AOI ========================= -->
+	<aside class="sidebar sidebar-menu-1">
+		<div class="card" style="height: 100%; color: black; overflow-y: hidden;border-radius: 0px">
+			<div class="card-header p-5" style="background-color: black">
+				<i class="fas fa-arrow-left fa-1x" onclick="close_sidebar(4)" style="color: white"></i>
+				<span class="ml-2" style="color: white; font-size: 16px"> Select AOI</span>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Define an area of interest by drawing on map or uploading a geographic file
+				</h5>
+				<div class="dropdown-divider"></div>
+				<ul class="list-group ml-3 mt-4">
+					<li class="draw-hover" style="padding: 5px"> <a id="draw-rectangle"> Draw a rectangle </a> </li>
+					<li class="draw-hover" style="padding: 0px 5px 5px 5px"> <a id="draw-polygon"> Draw a polygon </a>
+					</li>
+				</ul>
+				<div class="dropdown-divider mt-5"></div>
+			</div>
+		</div>
+	</aside>
+	<!-- =================================================================================== -->
+
+	<!-- =========================SIDEBAR Passo 2 Selecionar imagem ========================= -->
+	<aside class="sidebar sidebar-menu-2">
+		<div class="card" style="height: 100%; color: black; overflow-y: hidden;border-radius: 0px">
+			<div class="card-header p-5" style="background-color: black">
+				<i class="fas fa-arrow-left fa-1x" onclick="close_sidebar(2)" style="color: white"></i>
+				<span class="ml-2" style="color: white; font-size: 16px"> Select Image</span>
+			</div>
+			<div class="card-body p-0">
+				<h5 class="card-title" style="margin: 10px 10px 0px 10px; padding: 0.65rem; ">
+					<span>
+						Select Imagery
+						<i class="fas fa-filter float-right mr-2 mt-1" onclick="toggle_filter()" title="Filter"
+							style="cursor: pointer"></i>
+					</span>
+				</h5>
+				<div class="dropdown-divider"></div>
+				<table id="table" style="width: 100%;" class="display compact nowrap">
+				</table>
+				<div id="no_data"></div>
+			</div>
+		</div>
+	</aside>
+	<!-- =================================================================================== -->
+
+	<!-- ========================= SIDEBAR FILTER ========================= -->
+	<aside class="filter">
+		<div class="card" style="height: 100%; color: black; overflow-y: hidden;border-radius: 0px">
+			<div class="card-body">
+				<h5 class="card-title">
+					<i class="fas fa-arrow-left fa-1x" onclick="close_filter()"></i>
+					Filter
+				</h5>
+				<div class="dropdown-divider"></div>
+				<p class="card-text mt-4"> Define the criteria for search imagery</p>
+				<div id='satellite-group'>
+					<div class='rc-heading'>Satellite</div>
+					<div id='satellites' class='rc-value'>
+						<div class="satellites">
+							<input type="checkbox" id="box-landsat" nome="landsat" name="landsat"
+								data-sensor="landsat-8" checked>
+							<label for="box-landsat">Landsat 8</label>
+							<input type="checkbox" nome="sentinel" id="box-sentinel" name="sentinel"
+								data-sensor="sentinel-2" checked>
+							<label for="box-sentinel">Sentinel-2</label>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-divider"></div>
+				<div id='aquisition-date'>
+					<div class='rc-heading'>Date Range</div>
+					<br>
+					<input class='date-input mt-3' style="width: 100%" type="text" id="rangeDate"
+						placeholder="Please select date range" data-input>
+				</div>
+				<div class="dropdown-divider m-4"></div>
+				<div id='cloud-cover'>
+					<div class='rc-heading'>Cloud Cover</div>
+					<div id='slider-cloud'></div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<a class="dropdown-item float-right dropdown-item-custom filter_search" style="border-radius: 0px">
+					Apply </a>
+				<a class="dropdown-item float-right dropdown-item-custom" onclick="close_filter()"
+					style="color:#f44336"> Close </a>
+			</div>
+		</div>
+	</aside>
+	<!-- =================================================================================== -->
+
+	<!-- =========================SIDEBAR IMAGE INFO ========================= -->
+	<aside class="sidebar-info">
+
+		<div class="card" style="height: 100%; color: black; overflow-y: hidden;border-radius: 0px">
+			<div class="card-header p-5" style="background-color: black">
+				<i class="fas fa-arrow-left fa-1x" onclick="close_sidebar_info()" style="color: white"></i>
+				<span class="ml-2" style="color: white; font-size: 16px"> Image Details </span>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">Image Details</h5>
+				<div class="dropdown-divider"></div>
+
+				<div id="img_satellite"></div>
+
+				<hr class="hr">
+				<label class="card-text"> <b> ID: </b> </label>
+				<span id="id"></span>
+
+				<hr class="hr">
+				<label class="card-text"> <b> Sensor: </b> </label>
+				<span id="sensor"></span>
+
+				<hr class="hr">
+				<label class="card-text"> <b> Off-Nadir </b> </label>
+				<span id="off-nadir"></span>
+
+				<div id="sun_azi"></div>
+				<div id="sun_ele"></div>
+				<div id="legacy_id"></div>
+
+				<hr class="hr">
+				<label class="card-text"> <b> Cloud Cover </b> </label>
+				<span id="cloud_cover"></span>
+
+				<hr class="hr">
+				<label for=""> <b>Acquisition Date</b> </label>
+				<span id="ac_date"></span>
+
+			</div>
+			<div class="card-footer tex1t-muted">
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item float-right dropdown-item-custom" onclick="close_sidebar_info()"
+					style="color:#f44336"> Close </a>
+			</div>
+		</div>
+	</aside>
+	<!-- =================================================================================== -->
+
+	<!-- ========================= MAP ========================= -->
+	<div id='map'></div>
+	<!-- =================================================================================== -->
+
+	<% include ./scripts %>
+	
+</body>
+
+</html>

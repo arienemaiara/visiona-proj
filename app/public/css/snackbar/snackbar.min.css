@@ -1,0 +1,42 @@
+#snackbar-container{
+    position:fixed;
+    left: 50%; /* sempre no centro */
+    bottom:-1px;
+    /*z-index:99999*/
+    z-index: -1;
+}
+    
+.snackbar{
+    overflow:hidden;
+    clear:both;
+    min-width:170px;
+    max-width:568px;
+    /*cursor:pointer;*/
+    opacity:0
+}
+
+.snackbar.snackbar-opened{
+    height:auto;
+    opacity:1
+}
+
+@media (max-width:767px){
+#snackbar-container{
+    left:0!important;
+    right:0;
+    width:100%
+}
+
+#snackbar-container .snackbar{
+    min-width:100%
+}
+
+#snackbar-container [class="snackbar snackbar-opened"]~.snackbar.toast{
+    margin-top:20px
+}
+
+#snackbar-container [class="snackbar snackbar-opened"]{
+    border-radius:0;
+    margin-bottom:0
+}
+}

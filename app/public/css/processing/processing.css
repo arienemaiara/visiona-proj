@@ -1,0 +1,164 @@
+#l8-group-cards {
+     margin-top: 30px;
+}
+
+#l8-group-cards h2 {
+     padding-bottom: 20px;
+}
+
+#s2-group-cards {
+     margin-top: 30px;
+}
+
+#s2-group-cards h2 {
+     padding-bottom: 20px;
+}
+
+.row {
+     z-index: 1;
+     margin: 0 !important;
+     padding: 0 !important;
+}
+
+.cardd {
+     border: 1px solid rgba(255,255,255,0.2);
+     height: 200px;
+     transition: 1s !important;
+     -webkit-transition: 1s !important;
+}
+
+.row h5 {
+     color: #fff;
+     font-family: 'Roboto Mono', 'Roboto', sans-serif;     
+     margin: 30px 0 2px 4px;
+     font-size: 15px;
+}
+
+.row h5:before {
+     position: absolute;
+     content: "";
+     top: 30px;
+     left: -2px;
+     width: 2px;
+     height: 22px;
+     display: block;
+     background: #fff;
+}
+
+.cardd p {
+     color: grey;
+     margin-left: 4px;
+     font-size: 14px !important;
+     margin-bottom: 70px !important;
+}
+
+.cardd a {
+     margin-left: 4px;
+     color: lightgrey !important;
+     font-family: 'Roboto Mono', 'Roboto', sans-serif;
+     font-weight: bolder;
+     text-transform: uppercase;
+     font-size: 11px;
+     letter-spacing: 2px;
+}
+
+.cardd a:hover {
+     text-decoration: none !important;
+     color: grey !important;
+}
+
+.cardd:hover:before {
+     transition: 1s !important;
+     -webkit-transition: 1s !important;
+     content: "";
+     position: absolute;
+     top: -100px;
+     left: 100px;
+     width: 300px; /*280px;*/ /* largura da imagem */
+     height: 240px; /*280px;*/ /* altura da imagem */
+     z-index: -1;
+     animation: anim 3.2s ease-in-out;
+}
+
+.l8-card1.cardd:hover::before {
+     background: url(../../assets/images/process_ndvi.jpg);
+}
+
+.l8-card2.cardd:hover::before {
+     background: url(../../assets/images/process_savi.jpg);
+}
+
+.l8-card3.cardd:hover::before {
+     background: url(../../assets/images/process_iaf.jpg);
+}
+
+.l8-card4.cardd:hover::before {
+     background: url(../../assets/images/process_true_color.jpg);
+}
+
+.l8-card5.cardd:hover::before {
+     background: url(../../assets/images/process_false_color.jpg);
+}
+
+.s2-card1.cardd:hover::before {
+     background: url(../../assets/images/process_ndvi.jpg);
+}
+
+.s2-card2.cardd:hover::before {
+     background: url(../../assets/images/process_savi.jpg);
+}
+
+.s2-card3.cardd:hover::before {
+     background: url(../../assets/images/process_iaf.jpg);
+}
+
+.s2-card4.cardd:hover::before {
+     background: url(../../assets/images/process_true_color.jpg);
+}
+
+.s2-card5.cardd:hover::before {
+     background: url(../../assets/images/process_false_color.jpg);
+}
+
+@keyframes anim {
+     0% {
+          opacity: 0;
+          left: 70px;
+     }
+
+     20% {
+          opacity: 0.8;
+          left: 100px;
+     }
+
+     100% {
+          opacity: 0.8;
+          left: 100px;
+     }
+}
+
+@media only screen and (max-width: 900px) {
+     .cardd a {
+          display: none !important;
+     }
+
+     .cardd {
+          height: 100px;
+     }
+
+     .row h5 {
+          margin: 28px 0 2px 4px;
+     }
+
+     .row p {
+          margin-bottom: 10px !important;
+     }
+
+     .row h5::before {
+          top: 26px;
+     }
+
+     .cardd:hover::before {
+          display: none;
+     }
+}
